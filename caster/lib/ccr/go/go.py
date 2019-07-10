@@ -1,7 +1,7 @@
 '''
 Created November 2018
 
-@author: Mike Roberts
+@author: Mike Roberts, Mike Morris 
 '''
 from dragonfly import Choice, Key, Text
 
@@ -93,6 +93,90 @@ class Go(MergeRule):
             R(Text("make(map[])") + Key("left:2"), rdescript="Go: create a map"),
         "package":
             R(Text("package "), rdescript="Go: package"),
+        # Custom Updates
+        "(end | finish) timer":
+            R(Text("elapsed := time.Since(start)\nfmt.Printf(\"execution took %s\", elapsed)"), rdescript="Go: finish timer"),
+        "(split string | strings split)":
+            R(Text("strings.Split()") + Key("left"), rdescript="Go: split string"),
+        "(start | begin) timer":
+            R(Text("start := time.Now()"), rdescript="Go: split string"),
+        "append":
+            R(Text("") + Key("home/5, s-end, c-c, right, space, equal, space, a, p, p, e, n, d, lparen, c-v, comma, space"), rdescript="Go: append"),
+        "create mutex":
+            R(Text("var mutex = sync.Mutex{}"), rdescript="Go: create mutex"),
+        "create weight group":
+            R(Text("var wg sync.WaitGroup"), rdescript="Go: create weight group"),
+        "go routine":
+            R(Text("go "), rdescript="Go: go routing"),
+        "make channel":
+            R(Text("make(chan )") + Key("left"), rdescript="Go: make channel" ),
+        "mutex lock":
+            R(Text("mutex.Lock()"), rdescript="Go: mutex lock"),
+        "mutex unlock":
+            R(Text("mutex.Unlock()"), rdescript="Go: mutex unlock"),
+        "package main":
+            R(Text("package main") + Key("enter"), rdescript="Go: package main"),
+        "file open":
+            R(Text("file, _ := os.Open()\ndefer file.Close()") + Key("up, end, left, dquote"), rdescript="Go: file open"),
+        "read file":
+            R(Text("ioutil.ReadFile()") + Key("left, dquote"), rdescript="Go: read file"),
+        "regular compile":
+            R(Text("regexp.MustCompile()") + Key("left, dquote"), rdescript="Go: regular compile"),
+        "regular find all [string] submatch":
+            R(Text("FindAllStringSubmatch(, -1)") + Key("left:5"), rdescript="Go: regular find all submatch"),
+        "scanner new":
+            R(Text("scanner := bufio.NewScanner(file)"), rdescript="Go: scanner new"),
+        "scanner scan":
+            R(Text("scanner.Scan()"), rdescript="Go: scanner scan"),
+        "scanner text":
+            R(Text("scanner.Text()"), rdescript="Go: scanner text"),
+        "send (message | channel)":
+            R(Text(" <- "), rdescript="Go: send message or channel"),
+        "shell iffae":
+            R(Text("else if  {}") + Key("left:3"), rdescript="Go: shell iffae"),
+        "variable":
+            R(Text("var "), rdescript="Go: variable"),
+        "weight group add":
+            R(Text("wg.Add(1)"), rdescript="Go: weight group add"),
+        "weight group done":
+            R(Text("wg.Done()"), rdescript="Go: weight group done"),
+        "weight group weight":
+            R(Text("wg.Wait()"), rdescript="Go: weight group weight"),
+        # Custom Types
+        "(inter | integer) eight":
+            R(Text("int8"), rdescript="Go: int8"),
+        "(inter | integer) sixteen":
+            R(Text("int16"), rdescript="Go: int16"),
+        "(inter | integer) sixty four":
+            R(Text("int64"), rdescript="Go: int64"),
+        "(inter | integer) thirty two":
+            R(Text("int32"), rdescript="Go: int32"),
+        "(inter | integer)":
+            R(Text("int"), rdescript="Go: int"),
+        "boolean":
+            R(Text("bool"), rdescript="Go: bool"),
+        "byte":
+            R(Text("byte"), rdescript="Go: byte"),
+        "float":
+            R(Text("float64"), rdescript="Go: float64"),
+        "interface":
+            R(Text("interface"), rdescript="Go: interface"),
+        "rune":
+            R(Text("rune"), rdescript="Go: rune"),
+        "string":
+            R(Text("string"), rdescript="Go: string"),
+        "unsigned (inter | integer) eight":
+            R(Text("uint8"), rdescript="Go: uint8"),
+        "unsigned (inter | integer) sixteen":
+            R(Text("uint16"), rdescript="Go: uint16"),
+        "unsigned (inter | integer) sixty four":
+            R(Text("uint64"), rdescript="Go: uint64"),
+        "unsigned (inter | integer) thirty two":
+            R(Text("uint32"), rdescript="Go: uint32"),
+        "unsigned (inter | integer)":
+            R(Text("uint"), rdescript="Go: uint"),
+		"if error":
+            R(Text("if err != nil {}") + Key("left"), rdescript="Go: if error"),
     }
 
     extras = []
